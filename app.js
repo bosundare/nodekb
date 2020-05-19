@@ -6,7 +6,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodekb', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect('process.env.MONGODB_URI || 'mongodb://localhost/nodekb', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 let db = mongoose.connection;
 
