@@ -5,6 +5,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 8080; // Step 1
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/nodekb', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
@@ -81,4 +82,4 @@ let users = require('./routes/users');
 app.use('/articles', articles);
 app.use('/users', users);
 
-app.listen(8080, function(){console.log('Server started on localhost:8080')});
+app.listen(PORT, console.log(`Server is starting at ${PORT}`));
