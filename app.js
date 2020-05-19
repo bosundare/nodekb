@@ -77,6 +77,8 @@ app.get('/', function(req, res){
 });
 
 let articles = require('./routes/articles');
-app.use('/articles', articles)
+let users = require('./routes/users');
+app.use('/articles', articles);
+app.use('/users', users);
 
 app.listen(3000, function(){console.log('Servier started on localhost:3000')});
