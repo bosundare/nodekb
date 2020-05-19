@@ -81,4 +81,4 @@ let users = require('./routes/users');
 app.use('/articles', articles);
 app.use('/users', users);
 
-app.listen(3000, function(){console.log('Server started on localhost:3000')});
+app.listen(8080, function(){console.log('Server started on localhost:8080')});
