@@ -4,6 +4,7 @@ html
     title Knowledgebase
     link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
     link(rel='stylesheet' href='/css/style.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
   body
     nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
       a.navbar-brand(href='/') Knowledgebase
@@ -15,15 +16,20 @@ html
             a.nav-link(href='/')
               | Home 
               span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='/articles/add') Add Article
-          li.nav-item
-            a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') By Bosun Dare
+          if user
+            li.nav-item
+              a.nav-link(href='/articles/add') Add Article
+            li.nav-item
+              a.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') By Bosun Dare
         ul.nav.nav-navbar.navbar-right
-          li.nav-item.active
-            a.nav-link(href='/users/register') Register
-          li.nav-item.active
-            a.nav-link(href='/users/login') Login
+          if user
+            li.nav-item.active
+              a.nav-link(href='/users/logout') Logout
+          else  
+            li.nav-item.active
+              a.nav-link(href='/users/register') Register
+            li.nav-item.active
+              a.nav-link(href='/users/login') Login
               
             //
               li.nav-item.dropdown
