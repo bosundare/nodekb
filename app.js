@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const config = require('./config/database');
 
-mongoose.connect(config.database, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(process.env.MONGODB_URI || config.database, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 let db = mongoose.connection;
 
@@ -42,7 +42,7 @@ app.use(session({
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
@@ -76,7 +76,7 @@ app.get('*', function(req, res, next){
   next();
 });
 
-app.get('/', ensureAuthenticated, function(req, res){
+app.get('/', ensureAuthenticated, (req, res) => {
   Article.find({}, function(err, articles){
     if(err){
       console.log(err);
@@ -105,5 +105,5 @@ function ensureAuthenticated(req, res, next){
 }
 
 
-
-app.listen(3000, function(){console.log('Server started on localhost:3000')});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, ()=>{console.log('Server started on localhost:3000')});
