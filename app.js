@@ -106,4 +106,4 @@ function ensureAuthenticated(req, res, next){
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, ()=>{console.log('Server started on localhost:3000')});
+app.listen(PORT, ()=>{console.log(`Server started on localhost:${PORT}`)});
