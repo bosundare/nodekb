@@ -76,7 +76,7 @@ app.get('*', function(req, res, next){
   next();
 });
 
-app.get('/', function(req, res){
+app.get('/', ensureAuthenticated, function(req, res){
   Article.find({}, function(err, articles){
     if(err){
       console.log(err);
@@ -93,5 +93,17 @@ let articles = require('./routes/articles');
 let users = require('./routes/users');
 app.use('/articles', articles);
 app.use('/users', users);
+
+// Access Control
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    req.flash('danger', 'Please login');
+    res.redirect('/users/login');
+  }
+}
+
+
 
 app.listen(3000, function(){console.log('Server started on localhost:3000')});
